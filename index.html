@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语音识别助手</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎤 语音识别助手</h1>
+            <p class="subtitle">上传语音文件或直接录音，自动识别并处理</p>
+        </div>
+
+        <div class="main-content">
+            <div class="upload-section">
+                <h2>方式一：上传语音文件</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="audioFile" accept="audio/*" style="display: none;">
+                    <div class="upload-placeholder">
+                        <span class="upload-icon">📁</span>
+                        <p>点击或拖拽语音文件到此处</p>
+                        <p class="upload-hint">支持 MP3, WAV, M4A 等格式</p>
+                    </div>
+                </div>
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <span id="fileName"></span>
+                    <button class="btn-remove" onclick="removeFile()">✕</button>
+                </div>
+                <button class="btn-primary" onclick="processUploadedFile()">处理语音文件</button>
+            </div>
+
+            <div class="divider">或</div>
+
+            <div class="record-section">
+                <h2>方式二：直接录音</h2>
+                <div class="record-controls">
+                    <button class="btn-record" id="btnRecord" onclick="startRecording()">
+                        <span class="record-icon">🎤</span>
+                        <span class="record-text">开始录音</span>
+                    </button>
+                    <button class="btn-stop" id="btnStop" onclick="stopRecording()" disabled>
+                        <span class="stop-icon">⏹️</span>
+                        <span class="stop-text">停止录音</span>
+                    </button>
+                </div>
+                <div class="recording-status" id="recordingStatus" style="display: none;">
+                    <span class="recording-indicator"></span>
+                    <span class="recording-text">正在录音...</span>
+                    <span class="recording-time" id="recordingTime">00:00</span>
+                </div>
+                <div class="audio-preview" id="audioPreview" style="display: none;">
+                    <audio id="audioPlayer" controls></audio>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>识别结果</h2>
+            <div class="result-content" id="resultContent">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>正在处理中，请稍候...</p>
+                </div>
+                <div class="result-text" id="resultText" style="display: none;">
+                    <pre id="resultJson"></pre>
+                </div>
+                <div class="result-error" id="resultError" style="display: none;">
+                    <p class="error-icon">❌</p>
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p> powered by 问学工作流</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
